@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package algoritmostrassen;
 
 /**
  *
- * @author leeyn
+ * @author leeynyker
  */
 public class AlgoritmoStrassen {
 
     /**
      * @param args the command line arguments
      */
+    //Variables necesarias
     private double matrizA[][];
     private double matrizB[][];
     private int fA;
@@ -33,6 +29,7 @@ public class AlgoritmoStrassen {
         this.cB = cB;
     }
     
+    //Obtiene los daatos desde la gui y generas la matrices a oper
     public double[][] generarMAtriz(){
         int nmA,nmB;
         double dosn;
@@ -56,6 +53,7 @@ public class AlgoritmoStrassen {
         
         N=Nn;
         dosn=1.5;
+        //Analiza si el tamaño de la matriz es de 2^n
         while((dosn%1)!=0){
             dosn=log(N,2);
             if((dosn%1)!=0){
@@ -65,6 +63,7 @@ public class AlgoritmoStrassen {
         double matrizA1[][] = new double[N][N];
         double matrizB1[][] = new double[N][N];
         
+        //Genera las matrices a operar
         for(int i =0;i<N;i++){
             for(int j=0;j<N;j++){
                 if((i<this.fA) && (j<this.cA)){
@@ -87,12 +86,13 @@ public class AlgoritmoStrassen {
         }
         
         
-        
+        //llama al metodo multiplicar
         double MatrizC[][]=multiplicar(matrizA1,matrizB1);
         
         return MatrizC;
     }
     
+    //Hace las operaciones necesarias
     public double[][] multiplicar(double[][]A,double[][]B){
         int t = A.length;  
         double[][] Resul = new double [t][t];
@@ -142,6 +142,7 @@ public class AlgoritmoStrassen {
         return Resul;
     }
     
+    //Une las submatrices para volver a forfar la matriz
     public void armar(double[][] C, double[][] P, int iB, int jB) 
     {
         for(int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++)
@@ -149,6 +150,7 @@ public class AlgoritmoStrassen {
                 P[i2][j2] = C[i1][j1];
     }  
     
+    //Resta las matrices
     public double[][] restar(double[][] A, double[][] B)
     {
         int n = A.length;
@@ -159,7 +161,7 @@ public class AlgoritmoStrassen {
         return C;
     }
     
-    
+    //Suma las matrices
     public double[][] sumar(double[][] A, double[][] B)
     {
         int n = A.length;
@@ -172,7 +174,7 @@ public class AlgoritmoStrassen {
         return C;
     }
     
-    
+    //Divide la matriz en submatrices
     public void cpara(double[][] P, double[][] C, int iB, int jB) 
     {
         for(int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++)
@@ -180,10 +182,12 @@ public class AlgoritmoStrassen {
                 C[i1][j1] = P[i2][j2];
     }
     
+    //Calcula logaritmo
     private static Double log(double num, int base) {
       return (Math.log10(num) / Math.log10(base));
    }
     
+    //Funcion principal que abre la gui
     public static void main(String[] args) {
         LauncherUI user = new LauncherUI();
         user.setLocationRelativeTo(null);
